@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI WEB开发工具导航</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 font-sans">
+    <nav class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-xl font-bold text-gray-900">AI WEB<span class="text-blue-600">工具导航</span></span>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+                    <!-- 导航链接将通过JavaScript动态生成 -->
+                </div>
+                <div class="flex items-center sm:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                        <span class="sr-only">打开主菜单</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="sm:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <!-- 移动端导航链接将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <header class="mb-16 text-center">
+            <div class="relative mx-auto w-24 h-24 mb-6 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                <i class="fas fa-tools text-white text-4xl"></i>
+            </div>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">AI WEB开发工具导航</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">精选各类AI开发与网站建设工具，助力您的项目开发</p>
+            <div class="mt-8 flex flex-wrap justify-center gap-2" id="category-nav">
+                <!-- 分类导航将通过JavaScript动态生成 -->
+            </div>
+        </header>
+
+        <main>
+            <!-- 内容将通过JavaScript动态生成 -->
+        </main>
+    </div>
+    
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold">AI<span class="text-blue-400">工具导航</span></h2>
+                    <p class="mt-2 text-gray-400">为AI开发者精心收集的工具集合</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400 text-sm">
+                <p>© 2025 AI WEB开发工具导航 - 精选开发工具集合</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html> 
