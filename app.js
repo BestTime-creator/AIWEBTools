@@ -221,7 +221,7 @@ function createCategorySection(categoryData, index) {
             ${categoryData.category}
             <span class="ml-2 text-sm text-gray-500 font-normal">(${categoryData.tools.length})</span>
         </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
     `;
     
     categoryData.tools.forEach(tool => {
@@ -240,14 +240,15 @@ function createCategorySection(categoryData, index) {
     return html;
 }
 
-// 生成分类导航按钮
-function createCategoryNavButtons() {
+// 生成左侧分类导航HTML
+function createLeftCategoryNav() {
     let html = '';
     
     toolsData.forEach((category, index) => {
         html += `
-        <a href="#category-${index}" class="inline-block px-4 py-2 bg-white hover:bg-blue-50 text-gray-800 rounded-full shadow-sm transition-colors duration-200 border border-gray-200">
-            ${category.category}
+        <a href="#category-${index}" class="category-link flex items-center justify-between" data-index="${index}">
+            <span>${category.category}</span>
+            <span class="category-count">${category.tools.length}</span>
         </a>
         `;
     });
@@ -260,7 +261,7 @@ function createTopNavLinks() {
     let html = '';
     
     // 限制显示的分类数量，避免顶部导航过长
-    const visibleCategories = toolsData.slice(0, 6);
+    const visibleCategories = toolsData.slice(0, 5);
     
     visibleCategories.forEach((category, index) => {
         html += `
@@ -271,7 +272,7 @@ function createTopNavLinks() {
     });
     
     // 如果有更多分类，添加"更多"下拉菜单
-    if (toolsData.length > 6) {
+    if (toolsData.length > 5) {
         html += `
         <div class="relative group">
             <button class="px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 flex items-center">
@@ -281,9 +282,9 @@ function createTopNavLinks() {
             <div class="absolute right-0 w-48 py-1 mt-1 bg-white rounded-md shadow-lg hidden group-hover:block z-10">
         `;
         
-        toolsData.slice(6).forEach((category, index) => {
+        toolsData.slice(5).forEach((category, index) => {
             html += `
-            <a href="#category-${index + 6}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            <a href="#category-${index + 5}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 ${category.category}
             </a>
             `;
@@ -316,7 +317,7 @@ function createMobileNavLinks() {
 // 加载页面内容
 document.addEventListener('DOMContentLoaded', () => {
     const mainElement = document.querySelector('main');
-    const categoryNavElement = document.getElementById('category-nav');
+    const leftCategoryNavElement = document.getElementById('left-category-nav');
     const topNavElement = document.querySelector('.sm\\:flex.sm\\:items-center');
     const mobileNavElement = document.querySelector('#mobile-menu .px-2');
     
@@ -327,8 +328,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     mainElement.innerHTML = content;
     
-    // 生成分类导航按钮
-    categoryNavElement.innerHTML = createCategoryNavButtons();
+    // 生成左侧分类导航
+    leftCategoryNavElement.innerHTML += createLeftCategoryNav();
     
     // 生成顶部导航链接
     topNavElement.innerHTML = createTopNavLinks();
@@ -353,6 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 页面滚动时高亮当前分类
     const categoryElements = document.querySelectorAll('.category-section');
+    const categoryLinks = document.querySelectorAll('.category-link');
     
     function highlightCurrentCategory() {
         let currentCategoryIndex = 0;
@@ -364,12 +366,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // 高亮导航按钮
-        document.querySelectorAll('#category-nav a').forEach((link, index) => {
+        // 高亮左侧导航链接
+        categoryLinks.forEach((link, index) => {
             if (index === currentCategoryIndex) {
-                link.classList.add('bg-blue-50', 'border-blue-300');
+                link.classList.add('active');
             } else {
-                link.classList.remove('bg-blue-50', 'border-blue-300');
+                link.classList.remove('active');
             }
         });
     }
@@ -377,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', highlightCurrentCategory);
     highlightCurrentCategory(); // 初始运行一次
     
-    // 平滑滚动
+    // 平滑滚动并更新导航状态
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -385,10 +387,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
+                // 添加平滑滚动
                 window.scrollTo({
                     top: targetElement.offsetTop - 80, // 考虑顶部导航栏的高度
                     behavior: 'smooth'
                 });
+                
+                // 更新导航状态
+                if (this.classList.contains('category-link')) {
+                    categoryLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                }
             }
         });
     });
