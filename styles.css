@@ -92,14 +92,53 @@ nav {
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
-/* 导航按钮 */
-#category-nav a {
+/* 左侧分类导航 */
+#left-category-nav {
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+#left-category-nav a {
+    display: block;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+#left-category-nav a:hover {
+    background-color: rgba(0, 113, 227, 0.05);
+    color: var(--primary-color);
+}
+
+#left-category-nav a.active {
+    background-color: rgba(0, 113, 227, 0.1);
+    color: var(--primary-color);
+    border-color: rgba(0, 113, 227, 0.2);
+    font-weight: 600;
+}
+
+#left-category-nav a .category-count {
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-secondary);
+    border-radius: 1rem;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
     transition: var(--transition);
 }
 
-#category-nav a:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+#left-category-nav a:hover .category-count,
+#left-category-nav a.active .category-count {
+    background-color: rgba(0, 113, 227, 0.2);
+    color: var(--primary-color);
 }
 
 /* 页面加载动画 */
@@ -140,7 +179,7 @@ html {
 
 /* 滚动条样式 */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -149,7 +188,7 @@ html {
 
 ::-webkit-scrollbar-thumb {
     background: #c7c7cc;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -157,7 +196,7 @@ html {
 }
 
 /* 适应移动设备 */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .category-title {
         font-size: 1.5rem;
     }
@@ -166,10 +205,17 @@ html {
         padding: 1rem;
     }
     
-    #category-nav {
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 1rem;
+    /* 移动端左侧导航样式 */
+    #left-category-nav {
+        margin-bottom: 2rem;
+        padding: 1rem;
+    }
+    
+    #left-category-nav a {
+        display: inline-block;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
     }
 } 
