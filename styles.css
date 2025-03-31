@@ -25,8 +25,8 @@ body {
 /* 分类标题样式 */
 .category-title {
     font-weight: 600;
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
     color: var(--text-primary);
     letter-spacing: -0.025em;
     position: relative;
@@ -38,7 +38,7 @@ body {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 40px;
+    width: 36px;
     height: 3px;
     background-color: var(--primary-color);
     border-radius: 3px;
@@ -48,13 +48,13 @@ body {
 .category-divider {
     height: 1px;
     background: linear-gradient(to right, rgba(209, 213, 219, 0.1), rgba(209, 213, 219, 1), rgba(209, 213, 219, 0.1));
-    margin: 4rem 0;
+    margin: 2rem 0;
 }
 
 /* 工具卡片样式 */
 .tool-card {
     background: var(--card-bg);
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     overflow: hidden;
     transition: var(--transition);
     box-shadow: var(--shadow-sm);
@@ -63,16 +63,120 @@ body {
 }
 
 .tool-card:hover {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-md);
     border-color: #c2c2c7;
 }
 
+/* 图标容器样式 */
+.tool-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 113, 227, 0.1);
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.tool-card:hover .tool-icon-container {
+    background-color: rgba(0, 113, 227, 0.2);
+    transform: scale(1.05);
+}
+
+.tool-icon-container i {
+    font-size: 1.25rem;
+}
+
+/* 网站logo样式 */
+.tool-logo-container {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.tool-card:hover .tool-logo-container {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.logo-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #f0f0f0, #e0e0e0, #f0f0f0);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    z-index: 1;
+}
+
+.tool-logo-container.loaded .logo-placeholder {
+    display: none;
+}
+
+@keyframes loading {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.tool-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+    position: relative;
+}
+
+/* 本地logo样式优化 */
+.local-logo {
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Claude特殊样式 */
+.tool-logo-container img[src*="claude.jpg"] {
+    object-fit: cover;
+    object-position: center;
+}
+
+.fallback-logo {
+    object-fit: cover;
+}
+
+/* 分类图标样式 */
+.category-title i {
+    font-size: 1.25rem;
+}
+
+/* 左侧导航图标样式 */
+#left-category-nav a i {
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+#left-category-nav a.active i {
+    color: var(--primary-color);
+}
+
 .tool-name {
     font-weight: 600;
-    font-size: 1.125rem;
+    font-size: 0.95rem;
     color: var(--text-primary);
     transition: color 0.2s ease;
+    line-height: 1.2;
 }
 
 .tool-card:hover .tool-name {
@@ -81,8 +185,9 @@ body {
 
 .tool-description {
     color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-top: 0.5rem;
 }
 
 /* 顶部导航 */
@@ -102,7 +207,9 @@ nav {
 }
 
 #left-category-nav a {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 0.75rem 1rem;
     margin-bottom: 0.5rem;
     border-radius: 0.5rem;
@@ -110,6 +217,15 @@ nav {
     font-weight: 500;
     transition: var(--transition);
     border: 1px solid transparent;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#left-category-nav a .category-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 #left-category-nav a:hover {
@@ -125,20 +241,30 @@ nav {
 }
 
 #left-category-nav a .category-count {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgba(0, 0, 0, 0.1);
     color: var(--text-secondary);
     border-radius: 1rem;
-    padding: 0.125rem 0.5rem;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 0.5rem;
     font-size: 0.75rem;
-    margin-left: 0.5rem;
+    margin-left: 0.75rem;
     transition: var(--transition);
+    flex-shrink: 0;
 }
 
 #left-category-nav a:hover .category-count,
 #left-category-nav a.active .category-count {
     background-color: rgba(0, 113, 227, 0.2);
     color: var(--primary-color);
+}
+
+/* 类别部分的下方间距 */
+.category-section {
+    margin-bottom: 2rem;
 }
 
 /* 页面加载动画 */
@@ -212,10 +338,18 @@ html {
     }
     
     #left-category-nav a {
-        display: inline-block;
+        display: inline-flex;
         margin-right: 0.5rem;
         margin-bottom: 0.5rem;
         padding: 0.5rem 0.75rem;
         font-size: 0.9rem;
+        white-space: nowrap;
+    }
+    
+    #left-category-nav a .category-count {
+        margin-left: 0.5rem;
+        min-width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
     }
 } 
